@@ -1,7 +1,8 @@
 from common.util import clear_terminal
-from pynput import keyboard
+import keyboard
 
-secret_word = input('enter secret word').lower()
+
+secret_word = input('enter secret word: ').lower()
 
 lose_field = r'''
    +----+
@@ -27,6 +28,7 @@ for i in loser:
 part_player = 0
 
 n = len(secret_word)
+
 enter_field = ['_' for _ in range(n)]
 
 while True:
@@ -36,7 +38,7 @@ while True:
     print()
     print()
     print(''.join(enter_field))
-    letter = input('enter letter').lower()
+    letter = input('enter letter: ').lower()
     if ord(letter) < ord('a') or ord(letter) > ord('z') and len(letter) != 1:
         print('Error of the enter')
         continue
@@ -57,10 +59,47 @@ while True:
     if len(loser) == part_player:
         print('You lose! Congratulations!')
         print()
-        print('If you want to try again tap to space')
+        print('If you want to try again press to space. If you want to stop press other')
+        '''try:
+            if keyboard.is_pressed('o'):
+                while True:
+                    secret_word = input('enter secret word: ').lower()
+                    for i in secret_word:
+                        if ord(i) < ord('a') or ord(i) > ord('z'):
+                            print('A mistake in the word')
+                            continue
+                    break
+                last_letter = []
+                for i in loser:
+                    picture[i[0]][i[1]] = ' '
+                part_player = 0
+                n = len(secret_word)
+                enter_field = ['_' for _ in range(n)]
+                continue 
+        except:'''
         break
+
     elif '_' not in enter_field:
         print('You won! Congratulations!')
         print()
-        print('If you want to try again tap to escape')
+        print(''.join(enter_field))
+        print()
+        print('If you want to try again press to space. If you want to stop press other')
+        '''try:
+            if keyboard.is_pressed('o'):
+                while True:
+                    secret_word = input('enter secret word: ').lower()
+                    for i in secret_word:
+                        if ord(i) < ord('a') or ord(i) > ord('z'):
+                            print('A mistake in the word')
+                            continue
+                    break
+                last_letter = []
+                for i in loser:
+                    picture[i[0]][i[1]] = ' '
+                part_player = 0
+                n = len(secret_word)
+                enter_field = ['_' for _ in range(n)]
+                continue
+        except:'''
         break
