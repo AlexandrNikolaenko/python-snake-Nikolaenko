@@ -41,7 +41,7 @@ with keyboard.Listener(on_press=process_press) as listener:
         if body_snake == 0:
             field[snake[0][0]][snake[0][1]] = 'O'
         else:
-            for i in range(body_snake):
+            for i in range(body_snake + 1):
                 if i == 0:
                     field[snake[0][0]][snake[0][1]] = 'O'
                 else:
@@ -63,6 +63,4 @@ with keyboard.Listener(on_press=process_press) as listener:
             body_snake += 1
         else:
             snake.pop(-1)
-        time.sleep(0.5)
-
-
+        time.sleep(0.3)
