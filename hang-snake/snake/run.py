@@ -1,7 +1,8 @@
+import time
+
 from common.util import clear_terminal
 from pynput import keyboard
 from random import randint
-from array import *
 
 width, height = 20, 20
 
@@ -23,30 +24,34 @@ def process_press(key):
         case keyboard.Key.down:
             direction = (1, 0)
 
-snake = (i, [[generate_position()]])
+snake = [generate_position()]
 apple = generate_position()
 body_snake = 0
-new_elem = (snake[0][0] + direction[0], snake[0][1] + direction[1])
 
 while apple in snake:
     apple = generate_position()
 
 with keyboard.Listener(on_press=process_press) as listener:
+    process_press(listener)
     while True:
         clear_terminal()
         # рисуем змею и яблоко на поле
         field = [['.' for i in range(width)] for i in range(height)]
-        for i in body_snake:
-            if i == 0:
-                field[snake[0][0]][snake[0][1]] = 'O'
-            else:
-                field[snake[i][0]][snake[i][1]] = 'o'
+        new_elem = (snake[0][0] + direction[0], snake[0][1] + direction[1])
+        if body_snake == 0:
+            field[snake[0][0]][snake[0][1]] = 'O'
+        else:
+            for i in range(body_snake):
+                if i == 0:
+                    field[snake[0][0]][snake[0][1]] = 'O'
+                else:
+                    field[snake[i][0]][snake[i][1]] = 'o'
         field[apple[0]][apple[1]] = 'a'
 
         # выводим картинку
 
         for row in field:
-            print(''.join(row))
+            print(' '.join(row))
 
         # передвигаем змею
 
@@ -55,8 +60,9 @@ with keyboard.Listener(on_press=process_press) as listener:
         if new_elem == apple:
             while apple in snake:
                 apple = generate_position()
+            body_snake += 1
         else:
             snake.pop(-1)
-
+        time.sleep(0.5)
 
 
