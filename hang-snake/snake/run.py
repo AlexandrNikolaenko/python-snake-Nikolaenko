@@ -32,7 +32,6 @@ while apple in snake:
     apple = generate_position()
 
 with keyboard.Listener(on_press=process_press) as listener:
-    process_press(listener)
     while True:
         clear_terminal()
         # рисуем змею и яблоко на поле

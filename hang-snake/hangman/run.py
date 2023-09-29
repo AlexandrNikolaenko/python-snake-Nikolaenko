@@ -1,5 +1,13 @@
 from common.util import clear_terminal
-import keyboard
+from pynput import keyboard
+
+a = 0
+def repeat(key):
+    global a
+    if key == keyboard.Key.space:
+        a = 'continue'
+    else:
+        a = 'break'
 
 
 secret_word = input('enter secret word: ').lower()
